@@ -18,7 +18,7 @@ export class WebService {
         if(org == null) {
         throw new NotFoundError("Organization not found");
         }
-        return {message : {publicKey : org.public_key, organizationName : org.name}};
+        return org.id;
       }
     
       async createOrganization(organization: any) {
