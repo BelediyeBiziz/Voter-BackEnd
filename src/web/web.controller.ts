@@ -1,5 +1,6 @@
 import { Body, Controller, Get, Post, Query } from '@nestjs/common';
 import { WebService } from './web.service';
+import { query } from 'express';
 @Controller('web')
 export class WebController {
     constructor(private readonly webService: WebService) {}
@@ -16,6 +17,13 @@ export class WebController {
     createOrganization(@Body() organization : any) {
       return this.webService.createOrganization(organization);
     }
-
+    @Post('sso')
+    createSso(@Body() gmail : any) {
+      return this.webService.sso(gmail);
+    }
+    @Post('ssoPublicAddress')
+    createSsoPublicAddress(@Body() email : any) {
+      return this.webService.ssoPublicAddress(email);
+    }
 
 }

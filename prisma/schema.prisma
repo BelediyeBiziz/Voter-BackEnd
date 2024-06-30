@@ -9,7 +9,7 @@ datasource db {
 
 model organizations {
   id                Int                 @id @default(autoincrement())
-  public_key        String              @unique @db.VarChar(44) 
+  public_key        String              @unique @db.VarChar(44)
   name              String              @db.VarChar(25)
   proposals         proposals[]
   user_organization user_organization[]
@@ -35,5 +35,7 @@ model user_organization {
 model users {
   id                Int                 @id @default(autoincrement())
   public_key        String              @unique @db.VarChar(44)
+  gmail             String?             @unique @db.VarChar(50)
+  private_key       String?
   user_organization user_organization[]
 }

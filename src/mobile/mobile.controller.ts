@@ -15,5 +15,9 @@ export class MobileController {
   createUser(@Body() user : any) {
     return this.mobileService.createUser(user);
   }
+  @Post('sso')
+    createSso(@Body() email : any) {
+      return this.mobileService.sso(email);
+  
 
-}
+}}

@@ -1,5 +1,6 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { dbService } from '../db-service/db-service.service';
+import { WalletService } from 'src/wallet/wallet.service';
 @Injectable()
 export class MobileService {
     constructor(private readonly dbService: dbService) {}
@@ -42,6 +43,19 @@ export class MobileService {
         Logger.log(org.public_key,org.name)
         return {message : {publicKey : org.public_key, org_title : org.name},
       }
+      
     
     }
+    async sso(mail: any) {
+      const walletservice = new WalletService(this.dbService);
+      const  {email}  = mail;
+      console.log(email + " gmail adresi budur");
+      console.log(mail)
+      const deneme = await this.dbService.users.findUnique({ where: {gmail : email} });
+      if(deneme == null) {
+        
+       return walletservice.createWallet(email);
+      }
+      return {message : deneme.public_key + "public keyi ile zaten kayıtlı bi gmail adresi"};
+}
 }
